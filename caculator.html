@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calculator</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #main{
+            width:500px;
+            height:624px;
+            border:1px solid black;
+        }
+        input{
+            position: relative;
+            width: 500px;
+            box-sizing: border-box;
+            font-size:50px;
+        }
+        table{
+            box-sizing:border-box;
+            width:500px;
+            height:500px;
+        }
+        td{
+            font-size:50px;
+            text-align: center;
+            border:1px solid black;
+            width:120px;
+        }
+    </style>
+</head>
+<body onkeydown="key()">
+    <div id="main">
+        <input type="text" id="input" >
+        <input type="text" id="output">
+        <table>
+            <tr>
+                <td onclick="button('1')">1</td>
+                <td onclick="button('2')">2</td>
+                <td onclick="button('3')">3</td>
+                <td onclick="button('+')">+</td>
+            </tr>
+            <tr>
+                <td onclick="button('4')">4</td>
+                <td onclick="button('5')">5</td>
+                <td onclick="button('6')">6</td>
+                <td onclick="button('-')">-</td>
+            </tr>
+            <tr>
+                <td onclick="button('7')">7</td>
+                <td onclick="button('8')">8</td>
+                <td onclick="button('9')">9</td>
+                <td onclick="button('*')">*</td>
+            </tr>
+            <tr>
+                <td onclick="reset()">C</td>
+                <td onclick="button('0')">0</td>
+                <td onclick="calculate()">=</td>
+                <td onclick="button('/')">/</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var input=document.getElementById("input");
+        var output=document.getElementById("output");
+        function button(a){
+            input.value+=a;
+        }
+        function calculate(){
+            output.value=eval(input.value);
+            input.value="";
+            input.focus();
+        }
+        function reset(){
+            input.value="";
+            output.value="";
+            input.focus();
+        }
+        function key(){
+            var keycode=event.keycode;
+            if(keycode==13){
+                calculate();
+            }
+        }
+    </script>
+</body>
+</html>

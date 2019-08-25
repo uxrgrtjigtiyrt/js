@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body onkeydown="key()">
+    <input type="text" id="input">
+    <button onclick="add()">enter</button>
+    <hr>
+    <ul id="result"></ul>
+    <script>
+        function add(){
+            var result=document.getElementById("result");
+            var input =document.getElementById("input");
+            var li=document.createElement("li");
+            var button=document.createElement("button");
+            
+            button.innerText='x';
+            li.innerText=input.value;
+            li.appendChild(button);
+            result.appendChild(li);
+            button.onclick=function(){
+                var a=event.target.parentNode;
+                a.remove();
+            }
+            input.value="";
+            input.focus();
+        }
+        function key(){
+            var b=event.keyCode;
+            if(b==13){
+                add();
+            }
+        }
+    </script>
+</body>
+</html>
