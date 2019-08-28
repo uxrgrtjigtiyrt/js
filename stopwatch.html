@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="chrome">
+    <title>watch</title>
+</head>
+<body onload="clock()">
+        <div style="border:1px solid #dedede; width:600px; height:250px; line-height:250px; color:#666;font-size:100px; text-align:center;" id="clock">
+            </div>
+            <button id="startbut">start</button>
+            <button id="stopbut">stop</button>
+            <button id="resetbut">reset</button>
+            <button id="checkbut">check</button>
+            <ul id="check"></ul>
+    <script>
+        var date= new Date();
+        var tmp='first';
+        var past;
+        var present;
+        function clock(){
+            var clock=document.getElementById("clock");
+            var startbut=document.getElementById("startbut");
+            var stopbut=document.getElementById("stopbut");
+            var resetbut=document.getElementById("resetbut");
+            var checkbut=document.getElementById("checkbut");
+            var date= new Date();
+
+            var minute=sense(Math.floor((present-past)/60000),2);
+            var second=sense(Math.floor((present-past)%60000/1000),2);
+            var millisecond=sense(Math.floor((present-past)%1000/10),2);
+
+            if(tmp=='start'){
+                present=date.getTime();
+            }
+            else if(tmp=='first'){
+                present=date.getTime();
+                past=date.getTime();
+            }
+            else if(tmp=='stop'){
+                var difference=present-past;
+                present=date.getTime();
+                past=date.getTime()-difference;
+            }
+            startbut.onclick=function(){
+                tmp='start';
+            }
+            stopbut.onclick=function(){
+                tmp='stop';
+            }
+            resetbut.onclick=function(){
+                tmp='first';
+            }
+            checkbut.onclick=function(){
+                var check =document.getElementById("check");
+                var li=document.createElement("li");
+                var button=document.createElement("button");
+            
+                button.innerText='x';
+                li.innerText= minute+":"+second+":"+millisecond;
+                li.appendChild(button);
+                check.appendChild(li);
+                button.onclick=function(){
+                    var a=event.target.parentNode;
+                    a.remove();
+                }
+            }
+
+            
+
+            clock.innerHTML = minute+":"+second+":"+millisecond;
+            setTimeout("clock()",10);
+        }
+
+        function sense(num,len){
+            var a='';
+            num=num.toString();
+            if(num.length<len){
+                for(i=0;i<len-num.length;i++){
+                    a+="0";
+                }
+            }
+            return a+num;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="chrome">
+    <title>watch</title>
+</head>
+<body onload="clock()">
+        <div style="border:1px solid #dedede; width:600px; height:250px; line-height:250px; color:#666;font-size:100px; text-align:center;" id="clock">
+            </div>
+            <h1 id="cal"></h1>
+    <script>
+        function clock(){
+            var clock=document.getElementById("clock");
+            var calResult=document.getElementById("cal");
+            var date= new Date();
+            var cal=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+            var am='AM';
+            var hours=sense(date.getHours(),2);
+            var minute=sense(date.getMinutes(),2);
+            var seconds=sense(date.getSeconds(),2);
+
+            if(hours>=12){
+                am='PM';
+                hours=sense(hours-12,2);
+            }
+            calResult.innerHTML=cal;
+            clock.innerHTML = hours+":"+minute+":"+seconds +" <span style='font-size:50px;'>"+ am+"</span>";
+            setTimeout("clock()",1000);
+        }
+
+        function sense(num,len){
+            var a='';
+            num=num.toString();
+            if(num.length<len){
+                for(i=0;i<len-num.length;i++){
+                    a+="0";
+                }
+            }
+            return a+num;
+        }
+    </script>
+</body>
+</html>
